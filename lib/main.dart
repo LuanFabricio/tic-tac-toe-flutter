@@ -27,29 +27,36 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.grey[800],
-        body: GridView.builder(
-          itemCount: 9,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3),
-          itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-                onTap: () {
-                  _tapped(index);
-                },
-                child: Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.grey)),
-                  child: Center(
-                      child: Text(
-                    board[index],
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
-                    ),
-                  )),
-                ));
-          },
-        ));
+        body: RefreshIndicator(
+            onRefresh: _onRefresh,
+            child: GridView.builder(
+                itemCount: 9,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3),
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                      onTap: () {
+                        _tapped(index);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey)),
+                        child: Center(
+                            child: Text(
+                          board[index],
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 40,
+                          ),
+                        )),
+                      ));
+                })));
+  }
+
+  Future<void> _onRefresh() async {
+    setState(() {
+      board = List<String>.filled(9, '', growable: false);
+    });
   }
 
   void _tapped(int index) {
