@@ -97,6 +97,138 @@ void main() {
   });
 
   group("Game finished", () {
-    group("rowWin", () {});
+    group("rowWin", () {
+      test("X should can win", () {
+        final game = TicTacToe();
+
+        final rows = [0, 1, 2];
+        final insertions = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+        ];
+        bool expectedResult;
+        for (final (index, testingRow) in rows.indexed) {
+          game.reset();
+          expectedResult = false;
+          for (final grid in insertions[index]) {
+            expect(game.rowWin(testingRow), expectedResult);
+            game.insert(grid, TicTacToe.xBits);
+          }
+          expectedResult = true;
+          expect(game.rowWin(testingRow), expectedResult);
+        }
+      });
+
+      test("O should can win", () {
+        final game = TicTacToe();
+
+        final rows = [0, 1, 2];
+        final insertions = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+        ];
+        bool expectedResult;
+        for (final (index, testingRow) in rows.indexed) {
+          game.reset();
+          expectedResult = false;
+          for (final grid in insertions[index]) {
+            expect(game.rowWin(testingRow), expectedResult);
+            game.insert(grid, TicTacToe.oBits);
+          }
+          expectedResult = true;
+          expect(game.rowWin(testingRow), expectedResult);
+        }
+      });
+    });
+
+    group("colWin", () {
+      test("X should can win", () {
+        final game = TicTacToe();
+
+        final cols = [0, 1, 2];
+        final insertions = [
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+        ];
+        bool expectedResult;
+        for (final (index, testingCol) in cols.indexed) {
+          game.reset();
+          expectedResult = false;
+          for (final grid in insertions[index]) {
+            expect(game.columnWin(testingCol), expectedResult);
+            game.insert(grid, TicTacToe.xBits);
+          }
+          expectedResult = true;
+          expect(game.columnWin(testingCol), expectedResult);
+        }
+      });
+
+      test("O should can win", () {
+        final game = TicTacToe();
+
+        final cols = [0, 1, 2];
+        final insertions = [
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+        ];
+        bool expectedResult;
+        for (final (index, testingCol) in cols.indexed) {
+          game.reset();
+          expectedResult = false;
+          for (final grid in insertions[index]) {
+            expect(game.columnWin(testingCol), expectedResult);
+            game.insert(grid, TicTacToe.oBits);
+          }
+          expectedResult = true;
+          expect(game.columnWin(testingCol), expectedResult);
+        }
+      });
+
+      group("diagonalWin", () {
+        test("X should can win", () {
+          final game = TicTacToe();
+
+          final insertions = [
+            [0, 4, 8],
+            [2, 4, 6],
+          ];
+          bool expectedResult;
+          for (final testingValues in insertions) {
+            game.reset();
+            expectedResult = false;
+            for (final grid in testingValues) {
+              expect(game.diagonalWin(), expectedResult);
+              game.insert(grid, TicTacToe.xBits);
+            }
+            expectedResult = true;
+            expect(game.diagonalWin(), expectedResult);
+          }
+        });
+
+        test("O should can win", () {
+          final game = TicTacToe();
+
+          final insertions = [
+            [0, 4, 8],
+            [2, 4, 6],
+          ];
+          bool expectedResult;
+          for (final testingValues in insertions) {
+            game.reset();
+            expectedResult = false;
+            for (final grid in testingValues) {
+              expect(game.diagonalWin(), expectedResult);
+              game.insert(grid, TicTacToe.oBits);
+            }
+            expectedResult = true;
+            expect(game.diagonalWin(), expectedResult);
+          }
+        });
+      });
+    });
   });
 }
