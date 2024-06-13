@@ -18,6 +18,10 @@ class TicTacToe {
     return 3 << _indexShift(index); // 0b11 << _indexShift(index)
   }
 
+  void reset() {
+    board = 0;
+  }
+
   int getValue(int index) {
     int val = (board & _indexMask(index)) >> _indexShift(index);
     return val;
