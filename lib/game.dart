@@ -23,7 +23,7 @@ class TicTacToe {
     return val;
   }
 
-  String valuetToString(int value) {
+  static String valuetToString(int value) {
     String valueString = '';
     switch (value) {
       case xBits:
