@@ -20,6 +20,17 @@ void main() {
     });
   });
 
+  group("reset", () {
+    test("Should reset board field to 0", () {
+      final game = TicTacToe.optional(42);
+
+      expect(game.board, isNot(0));
+
+      game.reset();
+      expect(game.board, 0);
+    });
+  });
+
   group("getValue", () {
     test("getValue should return the content of a cell", () {
       // Starts with the grid equal to x (from top left to bottom right)
