@@ -30,6 +30,26 @@ void main() {
     });
   });
 
+  group("valueToString", () {
+    test("Should cast xBits to 'x' string", () {
+      String xString = TicTacToe.valuetToString(TicTacToe.xBits);
+      expect(xString, 'x');
+    });
+
+    test("Should cast oBits to 'o' string", () {
+      String oString = TicTacToe.valuetToString(TicTacToe.oBits);
+      expect(oString, 'o');
+    });
+
+    test("Should cast other values empty string", () {
+      String empty = TicTacToe.valuetToString(0); // 0b00
+      expect(empty, '');
+
+      empty = TicTacToe.valuetToString(3); // 0b11
+      expect(empty, '');
+    });
+  });
+
   group("insert", () {
     test(
         "If the grid is empty, the insert method should update the board and return true",
