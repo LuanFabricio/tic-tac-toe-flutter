@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:tic_tac_toe_app/game.dart';
 import 'package:test/test.dart';
 
@@ -41,23 +42,43 @@ void main() {
     });
   });
 
+  group("boardToString", () {
+    test("Should copy current board state on a list of strings", () {
+      final game = TicTacToe();
+
+      // x o x
+      // o o x
+      // - x -
+      game.insert(0, TicTacToe.xBits);
+      game.insert(2, TicTacToe.xBits);
+      game.insert(5, TicTacToe.xBits);
+      game.insert(7, TicTacToe.xBits);
+      game.insert(1, TicTacToe.oBits);
+      game.insert(3, TicTacToe.oBits);
+      game.insert(4, TicTacToe.oBits);
+
+      String expectedString = "xoxoox x ";
+      expect(game.boardToString(), equals(expectedString));
+    });
+  });
+
   group("valueToString", () {
     test("Should cast xBits to 'x' string", () {
-      String xString = TicTacToe.valuetToString(TicTacToe.xBits);
+      String xString = TicTacToe.valueToString(TicTacToe.xBits);
       expect(xString, 'x');
     });
 
     test("Should cast oBits to 'o' string", () {
-      String oString = TicTacToe.valuetToString(TicTacToe.oBits);
+      String oString = TicTacToe.valueToString(TicTacToe.oBits);
       expect(oString, 'o');
     });
 
     test("Should cast other values empty string", () {
-      String empty = TicTacToe.valuetToString(0); // 0b00
-      expect(empty, '');
+      String empty = TicTacToe.valueToString(0); // 0b00
+      expect(empty, ' ');
 
-      empty = TicTacToe.valuetToString(3); // 0b11
-      expect(empty, '');
+      empty = TicTacToe.valueToString(3); // 0b11
+      expect(empty, ' ');
     });
   });
 
