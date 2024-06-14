@@ -27,8 +27,16 @@ class TicTacToe {
     return val;
   }
 
-  static String valuetToString(int value) {
-    String valueString = '';
+  String boardToString() {
+    String boardString = "";
+    for (int i = 0; i < 9; i++) {
+      boardString += valueToString(getValue(i));
+    }
+    return boardString;
+  }
+
+  static String valueToString(int value) {
+    String valueString = ' ';
     switch (value) {
       case xBits:
         valueString = 'x';
