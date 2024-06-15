@@ -49,7 +49,7 @@ class TicTacToe {
   }
 
   bool insert(int index, int value) {
-    int currentValue = board & _indexMask(index);
+    int currentValue = (board & _indexMask(index)) >> _indexShift(index);
     if (currentValue == xBits || currentValue == oBits) {
       return false;
     }
