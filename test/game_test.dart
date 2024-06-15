@@ -102,18 +102,28 @@ void main() {
     test(
         "If the grid have something, the insert method should'nt update the board and return false",
         () {
-      const gridValue = TicTacToe.xBits;
+      const gridValue = TicTacToe.xBits | (TicTacToe.oBits << (2 * 8));
       final game = TicTacToe.optional(gridValue);
 
-      const gridPosition = 0;
-      const insertedGridValue = TicTacToe.oBits;
+      int gridPosition = 0;
+      int insertedGridValue = TicTacToe.oBits;
       bool res = game.insert(gridPosition, insertedGridValue);
 
       bool expectedRes = false;
       expect(res, expectedRes);
 
-      const expectedGridValue = gridValue;
+      int expectedGridValue = TicTacToe.xBits;
       expect(game.getValue(gridPosition), expectedGridValue);
+
+      gridPosition = 8;
+      insertedGridValue = TicTacToe.xBits;
+      res = game.insert(gridPosition, insertedGridValue);
+
+      expectedRes = false;
+      expect(res, equals(expectedRes));
+
+      expectedGridValue = TicTacToe.oBits;
+      expect(game.getValue(gridPosition), equals(expectedGridValue));
     });
   });
 
